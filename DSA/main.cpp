@@ -2,6 +2,7 @@
 #include "SparseGraph.hpp"
 #include "DenseGraph.hpp"
 #include "ReadGraph.hpp"
+#include "Component.hpp"
 
 using namespace std;
 
@@ -56,17 +57,37 @@ int main()
 
 
 
-    // 7-4 图的算法框架
-    string filename = "testG1.txt";
+    //// 7-4 图的算法框架
+    //string filename = "testG1.txt";
+    //
+    //SparseGraph g1(13, false);
+    //ReadGraph<SparseGraph> readGraph1(g1, filename);
+    //g1.show();
+
+    //cout << endl;
+
+    //DenseGraph g2(13, false);
+    //ReadGraph<DenseGraph> readGraph2(g2, filename);
+    //g2.show();
+
+
+    // 7 - 5 dfs求连通分量的个数
     
+    // testG1.txt
+    string filename1 = "testG1.txt";
     SparseGraph g1(13, false);
-    ReadGraph<SparseGraph> readGraph1(g1, filename);
-    g1.show();
+    ReadGraph<SparseGraph> readGraph1(g1, filename1);
+    Component<SparseGraph> component1(g1);
+    cout <<  "testG1.txt, Coponent Count: " << component1.count() << endl;
 
     cout << endl;
 
-    DenseGraph g2(13, false);
-    ReadGraph<DenseGraph> readGraph2(g2, filename);
-    g2.show();
+    // testG2.txt
+    string filename2 = "testG2.txt";
+    SparseGraph g2(7, false);
+    ReadGraph<SparseGraph> readGraph2(g2, filename2);
+    Component<SparseGraph> component2(g2);
+    cout << "testG2.txt, Coponent Count: " << component2.count() << endl;
+
     return 0;
 }

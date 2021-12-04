@@ -140,6 +140,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Component.hpp" />
     <ClInclude Include="DenseGraph.hpp" />
     <ClInclude Include="ReadGraph.hpp" />
     <ClInclude Include="SparseGraph.hpp" />
