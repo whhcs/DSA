@@ -24,6 +24,7 @@
     <ProjectGuid>{58519f5e-2064-430e-a230-ec6e6cf79bf0}</ProjectGuid>
     <RootNamespace>DSA</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Graph</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -140,10 +141,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="DenseGraph.hpp" />
+    <ClInclude Include="ReadGraph.hpp" />
     <ClInclude Include="SparseGraph.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="testG1.txt" />
+    <Text Include="testG2.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
