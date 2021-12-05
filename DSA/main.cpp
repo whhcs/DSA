@@ -4,6 +4,7 @@
 #include "ReadGraph.hpp"
 #include "Component.hpp"
 #include "Path.hpp"
+#include "ShortestPath.hpp"
 
 using namespace std;
 
@@ -101,5 +102,10 @@ int main()
     Path<SparseGraph> dfs(g, 0);
     cout << "DFS: ";
     dfs.showPath(6);
+
+    // 7 - 7 广度优先遍历求无权图的最短路径
+    ShortestPath<SparseGraph> bfs(g, 0);
+    cout << "BFS: ";
+    bfs.showPath(6);
     return 0;
 }

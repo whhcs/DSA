@@ -144,6 +144,7 @@
     <ClInclude Include="DenseGraph.hpp" />
     <ClInclude Include="Path.hpp" />
     <ClInclude Include="ReadGraph.hpp" />
+    <ClInclude Include="ShortestPath.hpp" />
     <ClInclude Include="SparseGraph.hpp" />
   </ItemGroup>
   <ItemGroup>
