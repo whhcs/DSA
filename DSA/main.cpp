@@ -3,6 +3,7 @@
 #include "DenseGraph.hpp"
 #include "ReadGraph.hpp"
 #include "Component.hpp"
+#include "Path.hpp"
 
 using namespace std;
 
@@ -71,23 +72,34 @@ int main()
     //g2.show();
 
 
-    // 7 - 5 dfs求连通分量的个数
-    
-    // testG1.txt
-    string filename1 = "testG1.txt";
-    SparseGraph g1(13, false);
-    ReadGraph<SparseGraph> readGraph1(g1, filename1);
-    Component<SparseGraph> component1(g1);
-    cout <<  "testG1.txt, Coponent Count: " << component1.count() << endl;
+    //// 7 - 5 dfs求连通分量的个数
+    //
+    //// testG1.txt
+    //string filename1 = "testG1.txt";
+    //SparseGraph g1(13, false);
+    //ReadGraph<SparseGraph> readGraph1(g1, filename1);
+    //Component<SparseGraph> component1(g1);
+    //cout <<  "testG1.txt, Coponent Count: " << component1.count() << endl;
 
+    //cout << endl;
+
+    //// testG2.txt
+    //string filename2 = "testG2.txt";
+    //SparseGraph g2(7, false);
+    //ReadGraph<SparseGraph> readGraph2(g2, filename2);
+    //Component<SparseGraph> component2(g2);
+    //cout << "testG2.txt, Coponent Count: " << component2.count() << endl;
+
+
+    // 7 - 6 无向图中的dfs寻路算法
+    string filename = "testG2.txt";
+    SparseGraph g(7, false);
+    ReadGraph<SparseGraph> readGraph(g, filename);
+    g.show();
     cout << endl;
 
-    // testG2.txt
-    string filename2 = "testG2.txt";
-    SparseGraph g2(7, false);
-    ReadGraph<SparseGraph> readGraph2(g2, filename2);
-    Component<SparseGraph> component2(g2);
-    cout << "testG2.txt, Coponent Count: " << component2.count() << endl;
-
+    Path<SparseGraph> dfs(g, 0);
+    cout << "DFS: ";
+    dfs.showPath(6);
     return 0;
 }
