@@ -1,4 +1,9 @@
 #include <iostream>
+#include <string>
+#include <vector>
+#include <ctime>
+#include "SequenceST.hpp"
+#include "FileOps.hpp"
 
 using namespace std;
 
@@ -56,7 +61,7 @@ public:
 
 	// 在二分搜索树中搜索key所对应的值，如果这个值不存在，则返回nullptr
 	Value* search(Key key) {
-		retturn search(root, key);
+		return search(root, key);
 	}
 
 private:
@@ -105,7 +110,73 @@ private:
 	}
 };
 
+
+// 测试二分搜索树和顺序查找表之间的性能差距
+// 二分搜索树的性能远远优于顺序查找表
 int main() {
 
+	// 使用圣经作为我们的测试用例
+	string filename = "bible.txt";
+	vector<string> words;
+	if (FileOps::readFile(filename, words)) {
+
+		cout << "There are totally " << words.size() << " words in " << filename << endl;
+		cout << endl;
+
+		
+		// 测试BST
+		time_t startTime = clock();
+
+		// 统计圣经中所有词的词频
+		// 注：这个词频统计法相对简陋，没有考虑很多文本处理中的特殊问题
+		// 在这里只做性能测试用
+		BST<string, int> bst;
+		for (auto iter = words.begin(); iter != words.end(); iter++) {
+			int* res = bst.search(*iter);
+			if (res == nullptr)
+				bst.insert(*iter, 1);
+			else
+				(*res)++;
+		}
+
+		// 输出圣经中god一词出现的频率
+		if (bst.contain("god"))
+			cout << "'god' : " << *bst.search("god") << endl;
+		else
+			cout << "No word 'god' in " << filename << endl;
+
+		time_t endTime = clock();
+
+		cout << "BST , time: " << double(endTime - startTime) / CLOCKS_PER_SEC
+			<< " s." << endl;
+		cout << endl;
+
+
+		// 测试顺序查找表 SST
+		startTime = clock();
+
+		// 统计圣经中所有词的词频
+		// 注：这个词频统计法相对简陋，没有考虑很多文本处理中的特殊问题
+		// 在这里只做性能测试用
+		SequenceST<string, int> sst;
+		for (auto iter = words.begin(); iter != words.end(); iter++) {
+			int* res = sst.search(*iter);
+			if (res == nullptr)
+				sst.insert(*iter, 1);
+			else
+				(*res)++;
+		}
+
+		// 输出圣经中god一词出现的频率
+		if (sst.contain("god"))
+			cout << "'god' : " << *sst.search("god") << endl;
+		else
+			cout << "No word 'god' in " << filename << endl;
+
+		endTime = clock();
+
+		cout << "SST , time: " << double(endTime - startTime) / CLOCKS_PER_SEC
+			<< " s." << endl;
+	}
 	return 0;
 }
