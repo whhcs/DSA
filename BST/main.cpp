@@ -25,7 +25,8 @@ private:
 	int count;		// 节点个数
 
 public:
-	BST() {		// 默认构造一棵空二分搜索树
+	// 默认构造一棵空二分搜索树
+	BST() {		
 		root = nullptr;
 		count = 0;
 	}
@@ -48,10 +49,12 @@ public:
 		root = insert(root, key, value);
 	}
 
+	// 查看二分搜索树中是否存在键值key
 	bool contain(Key key) {
 		return contain(root, key);
 	}
 
+	// 在二分搜索树中搜索key所对应的值，如果这个值不存在，则返回nullptr
 	Value* search(Key key) {
 		retturn search(root, key);
 	}
@@ -74,7 +77,7 @@ private:
 		return node;
 	}
 
-	// 查看以node为根节点的二叉搜索树中是否包含键值为key的节点
+	// 查看以node为根节点的二叉搜索树中是否包含键值为key的节点，使用递归算法
 	bool contain(Node* node, Key key) {
 
 		if (node == nullptr)
@@ -87,7 +90,8 @@ private:
 			return contain(node->right, key);
 	}
 
-	// 在以node为根的二叉搜索树中查找key所对应的value
+	// 在以node为根的二叉搜索树中查找key所对应的value，使用递归算法
+	// 若value不存在，返回nullptr
 	Value* search(Node* node, Key key) {
 
 		if (node == nullptr)
