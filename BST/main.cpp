@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <ctime>
+#include <queue>
 #include "SequenceST.hpp"
 #include "FileOps.hpp"
 
@@ -81,6 +82,27 @@ public:
 		postOrder(root);
 	}
 
+	// 二分搜索树的层序遍历
+	void levelOrder() {
+		
+		if (root == nullptr)
+			return;
+
+		queue<Node*> q;
+		q.push(root);
+		while (!q.empty()) {
+
+			Node* node = q.front();
+			q.pop();
+
+			cout << node->key << endl;
+
+			if (node->left)
+				q.push(node->left);
+			if (node->right)
+				q.push(node->right);
+		}
+	}
 
 private:
 	// 向以node为根的二叉搜索树中，插入节点(key, value)，使用递归算法
@@ -278,6 +300,10 @@ int main() {
 	bst.postOrder();
 	cout << endl;
 
+	// 测试二分搜索树的层序遍历 levelOrder
+	cout << "levelOrder: " << endl;
+	bst.levelOrder();
+	cout << endl;
 
 	return 0;
 }
