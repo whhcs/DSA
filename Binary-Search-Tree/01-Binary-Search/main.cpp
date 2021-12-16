@@ -29,6 +29,7 @@ int binarySearch(T arr[], int n, T target) {
 
 
 // 用递归的方式写二分查找法
+
 template<typename T>
 int _binarySearch2(T arr[], int l, int r, T target) {
 
