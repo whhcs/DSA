@@ -79,7 +79,7 @@ public:
 
 	// 查看顺序表中是否包含键值为key的节点
 	bool contain(Key key) {
-		
+
 		Node* node = head;
 		while (node != nullptr) {
 			if (key == node->key)

@@ -1,5 +1,8 @@
 #include <iostream>
-#include <queue>
+#include <vector>
+#include <string>
+#include "SequenceST.hpp"
+#include "FileOps.hpp"
 
 using namespace std;
 
@@ -34,7 +37,7 @@ public:
 
 	// 析构函数，释放二分搜索树的所有空间
 	~BST() {
-		destroy(root);
+		// TODO:
 	}
 
 	// 返回二分搜索树的节点个数
@@ -62,49 +65,6 @@ public:
 		return search(root, key);
 	}
 
-	// 二分搜索树的前序遍历
-	void preOrder() {
-		preOrder(root);
-	}
-
-	// 二分搜索树的中序遍历
-	void inOrder() {
-		inOrder(root);
-	}
-
-	// 二分搜索树的后序遍历
-	void postOrder() {
-		postOrder(root);
-	}
-
-	// 二分搜索树的层序遍历
-	void levelOrder() {
-
-		if (root == nullptr)
-			return;
-
-		queue<Node*> q;
-		q.push(root);
-		while (!q.empty()) {
-
-			Node* node = q.front();
-			q.pop();
-
-			cout << node->key << endl;
-
-			if (node->left)
-				q.push(node->left);
-			if (node->right)
-				q.push(node->right);
-		}
-	}
-
-	// 寻找最小的键值
-	Key minimum() {
-		assert(count != 0);
-		Node* minNode = minimum(root);
-		return minNode->key;
-	}
 private:
 	// 向以node为根的二叉搜索树中，插入节点(key, value)，使用递归算法
 	// 返回插入新节点后的二叉搜索树的根
@@ -149,59 +109,76 @@ private:
 		else
 			return search(node->right, key);
 	}
-
-	// 对以node为根的二叉搜索树进行前序遍历，递归算法
-	void preOrder(Node* node) {
-
-		if (node != nullptr) {
-			cout << node->key << endl;
-			preOrder(node->left);
-			preOrder(node->right);
-		}
-	}
-
-	// 对以node为根的二叉搜索树进行中序遍历，递归算法
-	void inOrder(Node* node) {
-
-		if (node != nullptr) {
-			inOrder(node->left);
-			cout << node->key << endl;
-			inOrder(node->right);
-		}
-	}
-
-	// 对以node为根的二叉搜索树进行后序遍历，递归算法
-	void postOrder(Node* node) {
-
-		if (node != nullptr) {
-			postOrder(node->left);
-			postOrder(node->right);
-			cout << node->key << endl;
-		}
-	}
-
-	// 释放以node为根的二分搜索树的所有节点
-	// 采用后序遍历的递归算法
-	void destroy(Node* node) {
-
-		if (node != nullptr) {
-			destroy(node->left);
-			destroy(node->right);
-
-			delete node;
-			count--;
-		}
-	}
-
-	Node* minimum(Node* node) {
-		if (node->left == nullptr)
-			return node;
-
-		return minimum(node->left);
-	}
 };
+
 
 int main() {
 
+	// 测试二分搜索树和顺序查找表之间的性能差距
+// 二分搜索树的性能远远优于顺序查找表
+
+// 使用圣经作为我们的测试用例
+	string filename = "bible.txt";
+	vector<string> words;
+	if (FileOps::readFile(filename, words)) {
+
+		cout << "There are totally " << words.size() << " words in " << filename << endl;
+		cout << endl;
+
+
+		// 测试BST
+		time_t startTime = clock();
+
+		// 统计圣经中所有词的词频
+		// 注：这个词频统计法相对简陋，没有考虑很多文本处理中的特殊问题
+		// 在这里只做性能测试用
+		BST<string, int> bst;
+		for (auto iter = words.begin(); iter != words.end(); iter++) {
+			int* res = bst.search(*iter);
+			if (res == nullptr)
+				bst.insert(*iter, 1);
+			else
+				(*res)++;
+		}
+
+		// 输出圣经中god一词出现的频率
+		if (bst.contain("god"))
+			cout << "'god' : " << *bst.search("god") << endl;
+		else
+			cout << "No word 'god' in " << filename << endl;
+
+		time_t endTime = clock();
+
+		cout << "BST , time: " << double(endTime - startTime) / CLOCKS_PER_SEC
+			<< " s." << endl;
+		cout << endl;
+
+
+		// 测试顺序查找表 SST
+		startTime = clock();
+
+		// 统计圣经中所有词的词频
+		// 注：这个词频统计法相对简陋，没有考虑很多文本处理中的特殊问题
+		// 在这里只做性能测试用
+		SequenceST<string, int> sst;
+		for (auto iter = words.begin(); iter != words.end(); iter++) {
+			int* res = sst.search(*iter);
+			if (res == nullptr)
+				sst.insert(*iter, 1);
+			else
+				(*res)++;
+		}
+
+		// 输出圣经中god一词出现的频率
+		if (sst.contain("god"))
+			cout << "'god' : " << *sst.search("god") << endl;
+		else
+			cout << "No word 'god' in " << filename << endl;
+
+		endTime = clock();
+
+		cout << "SST , time: " << double(endTime - startTime) / CLOCKS_PER_SEC
+			<< " s." << endl;
+	}
 	return 0;
 }
