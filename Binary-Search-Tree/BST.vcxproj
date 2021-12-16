@@ -140,11 +140,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Text Include="communist.txt" />
     <Text Include="bible.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FileOps.hpp" />
-    <ClInclude Include="SequenceST.hpp" />
+    <ClInclude Include="03-Binary-Search-Tree-Search\FileOps.hpp" />
+    <ClInclude Include="03-Binary-Search-Tree-Search\SequenceST.hpp" />
+    <ClInclude Include="07-Binary-Search-Tree-Disadvantages\BST.hpp" />
+    <ClInclude Include="07-Binary-Search-Tree-Disadvantages\FileOps.hpp" />
+    <ClInclude Include="07-Binary-Search-Tree-Disadvantages\SequenceST.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="07-Binary-Search-Tree-Disadvantages\main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

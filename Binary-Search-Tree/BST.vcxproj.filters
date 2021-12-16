@@ -16,13 +16,28 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="bible.txt" />
+    <Text Include="communist.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FileOps.hpp">
+    <ClInclude Include="03-Binary-Search-Tree-Search\FileOps.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="SequenceST.hpp">
+    <ClInclude Include="03-Binary-Search-Tree-Search\SequenceST.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="07-Binary-Search-Tree-Disadvantages\BST.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="07-Binary-Search-Tree-Disadvantages\FileOps.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="07-Binary-Search-Tree-Disadvantages\SequenceST.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="07-Binary-Search-Tree-Disadvantages\main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
